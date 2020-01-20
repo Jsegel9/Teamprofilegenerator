@@ -14,3 +14,5 @@ test2.id = "b";
 test2.email = "c@c.com";
 // Engineer.printInfo();
 console.log(test2);
+
+module.exports = Engineer;

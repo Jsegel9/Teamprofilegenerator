@@ -6,6 +6,9 @@ class Intern extends Employee {
         this.school = school;
         this.role = "Intern";
     }
+    getSchool() {
+        return this.school;
+    }
 }
 
 const test3 = new Intern("Miami University");

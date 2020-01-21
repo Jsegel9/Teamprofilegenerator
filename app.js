@@ -65,15 +65,90 @@ function chooseRole(){
 }
 
 function createManager(){
-    //
+    inquirer
+    .prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What is the Manager's name?"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What is their ID #?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is their email address?"
+        },
+        {
+            type: "input",
+            name: "number",
+            message: "Please enter your office number",
+        }
+    ])
+    .then(function(response){
+        console.log(response);
+    })
 }
 
 function createEngineer(){
-    //
+    inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "What is the Engineer's name?"
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "What is their ID #?"
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is their email address?"
+            },
+            {
+                type: "input",
+                name: "git",
+                message: "What is their Github Username?"
+            }
+        ])
+        .then(function(response){
+            console.log(response);
+        })
 }
 
 function createIntern(){
-    //
+    inquirer
+    .prompt([
+        {
+            type:"input",
+            name:"Name",
+            message: "What is the Intern's name?"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What is their ID #?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is their email address?"
+        },
+        {
+            type: "input",
+            name: "school",
+            message: "Where do they go to school?"
+        }
+    ])
+    .then(function(response){
+        console.log(response);
+    })
 }
 
 function testfun(){

@@ -89,7 +89,13 @@ function createManager(){
         }
     ])
     .then(function(response){
-        console.log(response);
+        // console.log(response);
+        const newManager = new Manager();
+        newManager.name = response.name;
+        newManager.email = response.email;
+        newManager.id = response.id;
+        newManager.officeNumber = response.number;
+        console.log(newManager);
     })
 }
 
@@ -118,7 +124,13 @@ function createEngineer(){
             }
         ])
         .then(function(response){
-            console.log(response);
+            // console.log(response);
+            const newEngineer = new Engineer();
+            newEngineer.name = response.name;
+            newEngineer.id = response.id;
+            newEngineer.email = response.email;
+            newEngineer.github = response.git;
+            console.log(newEngineer);
         })
 }
 
@@ -127,7 +139,7 @@ function createIntern(){
     .prompt([
         {
             type:"input",
-            name:"Name",
+            name:"name",
             message: "What is the Intern's name?"
         },
         {
@@ -147,7 +159,13 @@ function createIntern(){
         }
     ])
     .then(function(response){
-        console.log(response);
+        // console.log(response);
+        const newIntern = new Intern();
+        newIntern.name = response.name;
+        newIntern.id = response.id;
+        newIntern.email = response.email;
+        newIntern.school = response.school;
+        console.log(newIntern);
     })
 }
 

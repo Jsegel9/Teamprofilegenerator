@@ -96,6 +96,9 @@ function createManager(){
         newManager.id = response.id;
         newManager.officeNumber = response.number;
         console.log(newManager);
+        fs.appendFile("manager.json", JSON.stringify(newManager), function(error){
+            if (error) throw (error) 
+        })
     })
 }
 

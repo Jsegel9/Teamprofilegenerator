@@ -19,6 +19,9 @@ class Employee {
     getRole() {
         return this.role;
     }
+    getName() {
+        return this.name
+    }
 }
 
 const test = new Employee("test", 1, "test@test.com")

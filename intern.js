@@ -16,5 +16,5 @@ test3.name = "test3";
 test3.id = 2;
 test3.email = "test3@test.com"
 
-console.log(test3);
+// console.log(test3);
 module.exports = Intern;

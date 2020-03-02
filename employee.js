@@ -25,6 +25,6 @@ class Employee {
 }
 
 const test = new Employee("test", 1, "test@test.com")
-test.printInfo();
+// test.printInfo();
 
 module.exports = Employee;

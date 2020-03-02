@@ -30,7 +30,8 @@ function newTeam(){
                 // ])
             }
             else {
-                testfun();
+                console.log("Quitting")
+                process.exit(0)
             }
         })
 }
@@ -96,9 +97,10 @@ function createManager(){
         newManager.id = response.id;
         newManager.officeNumber = response.number;
         console.log(newManager);
-        fs.appendFile("manager.json", JSON.stringify(newManager), function(error){
+        fs.writeFile("./output/manager.json", JSON.stringify(newManager), function(error){
             if (error) throw (error) 
         })
+        nextFunction();
     })
 }
 
@@ -134,6 +136,10 @@ function createEngineer(){
             newEngineer.email = response.email;
             newEngineer.github = response.git;
             console.log(newEngineer);
+            fs.writeFile("./output/engineer.json", JSON.stringify(newEngineer), function(error){
+                if (error) throw (error)
+            })
+            nextFunction();
         })
 }
 
@@ -169,11 +175,116 @@ function createIntern(){
         newIntern.email = response.email;
         newIntern.school = response.school;
         console.log(newIntern);
+        fs.writeFile("./output/intern.json", JSON.stringify(newIntern), function(error){
+            if (error) throw (error)
+        })
+        nextFunction();
     })
 }
 
 function testfun(){
     console.log("hello")
+}
+
+function nextFunction(){
+    inquirer
+    .prompt([
+        {
+            type: "confirm",
+            name: "again",
+            message: "Would you like to add another employee?"
+        }
+    ])
+    .then(function(response){
+        if(response.again){
+            chooseRole();
+        }
+        else{
+            inquirer.prompt([
+                {
+                    type: "list",
+                    name: "done",
+                    message: "Are you done inputting your team?",
+                    choices: [
+                        "Add New Employee",
+                        "Generate Team",
+                        "Quit"
+                    ]
+                }
+            ])
+            .then(function(response){
+                if(response.done === "Add New Employee"){
+                    chooseRole();
+                }
+                else if(response.done === "Generate Team"){
+                    createRoster()
+                }else{
+                    process.exit(0)
+                }
+            })
+        }
+    })
+}
+
+function createRoster(){
+    console.log("Create Roster")
+    let rawManager = fs.readFileSync("./output/manager.json")
+    let manager2 = JSON.parse(rawManager)
+    let rawEngineer = fs.readFileSync("./output/engineer.json")
+    let engineer2 = JSON.parse(rawEngineer)
+    let rawIntern = fs.readFileSync("./output/intern.json")
+    let intern2 = JSON.parse(rawIntern)
+    const $html = `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Team Roster</h1>
+        <ul>
+            <li>
+                <h2>Manager</h2>
+                <br>
+                <p>Name: ${manager2.name}</p>
+                <br>
+                <p>ID: ${manager2.id}</p>
+                <br>
+                <p>Email: ${manager2.email}</p>
+                <br>
+                <p>Office Number: ${manager2.officeNumber}</p>
+            </li>
+            <li>
+                <h2>Engineer</h2>
+                <br>
+                <p>Name: ${engineer2.name}</p>
+                <br>
+                <p>ID: ${engineer2.id}</p>
+                <br>
+                <p>Email: ${engineer2.email}</p>
+                <br>
+                <p>Github Username: ${engineer2.github}</p>
+            </li>
+            <li>
+                <h2>
+                    Intern
+                </h2>
+                <br>
+                <p>Name: ${intern2.name}</p>
+                <br>
+                <p>ID: ${intern2.id}</p>
+                <br>
+                <p>Email: ${intern2.email}</p>
+                <br>
+                <p>School: ${intern2.school}</p>
+            </li>
+        </ul>
+    </body>
+    </html>`
+    fs.writeFile("index.html", $html, function(err){
+        if (err) throw (err)
+    })
 }
 
 newTeam();
